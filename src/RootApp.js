@@ -8,8 +8,13 @@ const intialState = {
   workspace: [
     {
       wid: 'sd2as2d2a2333sda',
-      title: 'MY Workspace',
-      todos: [],
+      title: 'My Workspace',
+      todos: {
+        pending: [],
+        completed: [],
+        process: [],
+        overdue: [],
+      },
       activity: [],
     },
   ],

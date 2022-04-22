@@ -6,6 +6,7 @@ export default (state, action) => {
       return {
         ...state,
         workspace: [...state.workspace, action.payload],
+        selectedIndex: state.workspace.length,
       };
     case DELETE_WORKSPACE:
       var newState = state.workspace.filter(
@@ -14,6 +15,7 @@ export default (state, action) => {
       return {
         ...state,
         workspace: newState,
+        selectedIndex: 0,
       };
     case SELECT_SPACE:
       return {

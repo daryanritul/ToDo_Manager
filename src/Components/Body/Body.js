@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { context } from '../../store/store';
 import Activity from '../Activity/Activity';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import TodoLists from '../TodoLists/TodoLists';
@@ -8,7 +9,7 @@ import sty from './Body.module.css';
 
 const Body = () => {
   const [toogleTodo, setToogleTodo] = useState(false);
-
+  const { state, dispatch } = useContext(context);
   const setToggle = status => {
     setToogleTodo(status);
   };
@@ -18,7 +19,9 @@ const Body = () => {
       <div className={sty.todos}>
         <div className={sty.todoHead}>
           <span>
-            <p className={sty.workTitle}>My Workspace-01</p>
+            <p className={sty.workTitle}>
+              {state.workspace[state.selectedIndex].title}
+            </p>
             <div className={sty.newTodo} onClick={() => setToggle(true)}>
               add new todo
             </div>

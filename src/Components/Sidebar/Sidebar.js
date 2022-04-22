@@ -9,6 +9,7 @@ import { context } from '../../store/store';
 import sty from './Sidebar.module.css';
 
 import Delete from '../../Assets/Delete.svg';
+import { v4 } from 'uuid';
 
 const Sidebar = () => {
   const { state, dispatch } = useContext(context);
@@ -24,7 +25,6 @@ const Sidebar = () => {
   const setWorkspaceIndex = index => {
     selectSpace(index, dispatch);
   };
-  console.log(state.selectedIndex);
   return (
     <>
       {cnfDelete && (
@@ -48,7 +48,7 @@ const Sidebar = () => {
               onClick={() => setWorkspaceIndex(index)}
             >
               {workspace.title}
-              {index === state.selectedIndex && (
+              {index === state.selectedIndex && index !== 0 && (
                 <span
                   className={sty.icons}
                   onClick={() => setCnfDelete(workspace.wid)}
@@ -89,7 +89,7 @@ const Sidebar = () => {
                   if (item.value !== '') {
                     addWorkspace(
                       {
-                        wid: 'sd2as2d2a2adasa333sda',
+                        wid: v4(),
                         title: item.value,
                         todos: [],
                         activity: [],
