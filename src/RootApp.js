@@ -4,13 +4,17 @@ import { context } from './store/store';
 
 import reducer from './store/reducer';
 
-const intialState = [
-  {
-    title: 'MY Workspace',
-    todos: [],
-    activity: [],
-  },
-];
+const intialState = {
+  workspace: [
+    {
+      wid: 'sd2as2d2a2333sda',
+      title: 'MY Workspace',
+      todos: [],
+      activity: [],
+    },
+  ],
+  selectedIndex: 0,
+};
 
 const RootApp = () => {
   const [state, dispatch] = useReducer(reducer, intialState);

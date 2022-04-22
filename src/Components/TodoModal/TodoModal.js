@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 
 import sty from './TodoModal.module.css';
 
+import { v4 as uuidv4 } from 'uuid';
+
 const TodoModal = ({ todo, setToggle }) => {
   const [title, setTitle] = useState(todo ? todo.title : todo.title);
   const [description, setDescription] = useState(todo ? todo.description : '');
   const [dueDate, setDueDate] = useState(todo ? todo.dueDate : false);
+
   const submitHandler = () => {
     console.log({
       title: title,
-      uid: todo ? todo.uid : null,
+      uid: uuidv4(),
       description: description,
       status: 'pending',
       createdAt: Date.now(),
