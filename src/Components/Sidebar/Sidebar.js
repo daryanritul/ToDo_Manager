@@ -91,7 +91,20 @@ const Sidebar = () => {
                       {
                         wid: v4(),
                         title: item.value,
-                        todos: [],
+                        todoLists: [
+                          {
+                            list: 'Pending',
+                            todo: [],
+                          },
+                          {
+                            list: 'Processing',
+                            todo: [],
+                          },
+                          {
+                            list: 'Overdue',
+                            todo: [],
+                          },
+                        ],
                         activity: [],
                       },
                       dispatch

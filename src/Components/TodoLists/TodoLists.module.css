@@ -1,5 +1,4 @@
 .todoList {
-  width: 100%;
   margin: 1rem;
   background: #fff;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -7,6 +6,7 @@
 }
 .listHead {
   display: flex;
+  width: 25rem;
   flex-direction: row;
   justify-content: space-between;
   border-bottom: 1px solid #1b98f5;

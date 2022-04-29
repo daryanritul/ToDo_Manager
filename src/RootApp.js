@@ -9,12 +9,23 @@ const intialState = {
     {
       wid: 'sd2as2d2a2333sda',
       title: 'My Workspace',
-      todos: {
-        pending: [],
-        completed: [],
-        process: [],
-        overdue: [],
-      },
+      todoLists: [
+        {
+          id: 0,
+          list: 'Pending',
+          todo: [],
+        },
+        {
+          id: 1,
+          list: 'Processing',
+          todo: [],
+        },
+        {
+          id: 2,
+          list: 'Completed',
+          todo: [],
+        },
+      ],
       activity: [],
     },
   ],

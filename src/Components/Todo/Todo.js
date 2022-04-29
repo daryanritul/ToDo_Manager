@@ -37,7 +37,6 @@ const Todo = ({ todo }) => {
             <img src={Delete} />
           </div>
         </div>
-        <p className={sty.desc}>{todo.description}</p>
         <div className={sty.todoFoot}>
           <div className={sty.status}>
             <div

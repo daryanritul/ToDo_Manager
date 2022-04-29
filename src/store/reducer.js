@@ -1,4 +1,10 @@
-import { ADD_WORKSPACE, DELETE_WORKSPACE, SELECT_SPACE } from './actions.types';
+import {
+  ADD_LIST,
+  ADD_WORKSPACE,
+  DELETE_LIST,
+  DELETE_WORKSPACE,
+  SELECT_SPACE,
+} from './actions.types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -21,6 +27,36 @@ export default (state, action) => {
       return {
         ...state,
         selectedIndex: action.payload,
+      };
+
+    case ADD_LIST:
+      var newSpace = state.workspace[state.selectedIndex];
+      var newList = [...newSpace.todoLists, action.payload];
+      return {
+        ...state,
+        workspace: [
+          ...state.workspace.slice(0, state.selectedIndex),
+          {
+            ...state.workspace[state.selectedIndex],
+            todoLists: newList,
+          },
+          ...state.workspace.slice(state.selectedIndex + 1),
+        ],
+      };
+    case DELETE_LIST:
+      var newList = state.workspace[state.selectedIndex].todoLists.filter(
+        list => list.id !== action.payload
+      );
+      return {
+        ...state,
+        workspace: [
+          ...state.workspace.slice(0, state.selectedIndex),
+          {
+            ...state.workspace[state.selectedIndex],
+            todoLists: newList,
+          },
+          ...state.workspace.slice(state.selectedIndex + 1),
+        ],
       };
   }
 };
