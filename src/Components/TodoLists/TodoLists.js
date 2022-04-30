@@ -9,8 +9,9 @@ import Delete from '../../Assets/Delete.svg';
 import { deleteList } from '../../store/actions';
 import { context } from '../../store/store';
 
-const TodoLists = ({ title, data, listId }) => {
+const TodoLists = ({ title, data, listId, index }) => {
   const { dispatch } = useContext(context);
+  console.log(data);
   const dummyTodo = [
     {
       title: 'Create Wireframe',
@@ -39,10 +40,10 @@ const TodoLists = ({ title, data, listId }) => {
         <img src={Delete} onClick={handleDelete} />
       </div>
       <div className={sty.listBody}>
-        {dummyTodo.map((todo, index) => (
-          <Todo key={index} todo={todo} />
+        {data.map(todo => (
+          <Todo key={todo.id} todo={todo} listId={listId} index={index} />
         ))}
-        <AddTodo type={'Todo'} />
+        <AddTodo type={'Todo'} listId={listId} index={index} />
       </div>
     </div>
   );

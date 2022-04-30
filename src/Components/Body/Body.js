@@ -34,6 +34,7 @@ const Body = () => {
             <TodoLists
               title={list.list}
               key={index}
+              index={index}
               data={list.todo}
               listId={list.id}
             />

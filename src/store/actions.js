@@ -1,7 +1,9 @@
 import {
   ADD_LIST,
+  ADD_TODO,
   ADD_WORKSPACE,
   DELETE_LIST,
+  DELETE_TODO,
   DELETE_WORKSPACE,
   SELECT_SPACE,
 } from './actions.types';
@@ -37,6 +39,18 @@ export const addLists = (data, dispatch) => {
 export const deleteList = (data, dispatch) => {
   dispatch({
     type: DELETE_LIST,
+    payload: data,
+  });
+};
+export const addTodo = (data, dispatch) => {
+  dispatch({
+    type: ADD_TODO,
+    payload: data,
+  });
+};
+export const deleteTodo = (data, dispatch) => {
+  dispatch({
+    type: DELETE_TODO,
     payload: data,
   });
 };

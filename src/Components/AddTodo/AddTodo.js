@@ -3,11 +3,11 @@ import sty from './AddTodo.module.css';
 
 import add from '../../Assets/Add.svg';
 import cross from '../../Assets/Cross.svg';
-import { addLists } from '../../store/actions';
+import { addLists, addTodo } from '../../store/actions';
 import { context } from '../../store/store';
 import { v4 } from 'uuid';
 
-const AddTodo = ({ type }) => {
+const AddTodo = ({ type, listId, index }) => {
   const { state, dispatch } = useContext(context);
 
   const [toggle, setToggle] = useState(false);
@@ -22,6 +22,22 @@ const AddTodo = ({ type }) => {
         },
         dispatch
       );
+    }
+    if (type === 'Todo') {
+      addTodo(
+        {
+          id: listId,
+          index: index,
+          todo: {
+            id: v4(),
+            title: todo,
+            createdAt: Date.now(),
+            dueDate: '2022-04-06',
+          },
+        },
+        dispatch
+      );
+      console.log('Done');
     }
   };
   return (

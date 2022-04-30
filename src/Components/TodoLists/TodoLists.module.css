@@ -1,5 +1,7 @@
 .todoList {
-  margin: 1rem;
+  margin: 0.5rem;
+  margin-left: 0.5rem;
+
   background: #fff;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 0.5rem;

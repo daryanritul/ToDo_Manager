@@ -1,7 +1,9 @@
 import {
   ADD_LIST,
+  ADD_TODO,
   ADD_WORKSPACE,
   DELETE_LIST,
+  DELETE_TODO,
   DELETE_WORKSPACE,
   SELECT_SPACE,
 } from './actions.types';
@@ -54,6 +56,67 @@ export default (state, action) => {
           {
             ...state.workspace[state.selectedIndex],
             todoLists: newList,
+          },
+          ...state.workspace.slice(state.selectedIndex + 1),
+        ],
+      };
+    case ADD_TODO:
+      return {
+        ...state,
+        workspace: [
+          ...state.workspace.slice(0, state.selectedIndex),
+          {
+            ...state.workspace[state.selectedIndex],
+            todoLists: [
+              ...state.workspace[state.selectedIndex].todoLists.slice(
+                0,
+                action.payload.index
+              ),
+              {
+                ...state.workspace[state.selectedIndex].todoLists[
+                  action.payload.index
+                ],
+                todo: [
+                  ...state.workspace[state.selectedIndex].todoLists[
+                    action.payload.index
+                  ].todo,
+                  action.payload.todo,
+                ],
+              },
+              ...state.workspace[state.selectedIndex].todoLists.slice(
+                action.payload.index + 1
+              ),
+            ],
+          },
+          ...state.workspace.slice(state.selectedIndex + 1),
+        ],
+      };
+
+    case DELETE_TODO:
+      var todos = state.workspace[state.selectedIndex].todoLists[
+        action.payload.index
+      ].todo.filter(todo => todo.id != action.payload.todoId);
+      return {
+        ...state,
+        workspace: [
+          ...state.workspace.slice(0, state.selectedIndex),
+          {
+            ...state.workspace[state.selectedIndex],
+            todoLists: [
+              ...state.workspace[state.selectedIndex].todoLists.slice(
+                0,
+                action.payload.index
+              ),
+              {
+                ...state.workspace[state.selectedIndex].todoLists[
+                  action.payload.index
+                ],
+                todo: todos,
+              },
+              ...state.workspace[state.selectedIndex].todoLists.slice(
+                action.payload.index + 1
+              ),
+            ],
           },
           ...state.workspace.slice(state.selectedIndex + 1),
         ],
