@@ -1,16 +1,17 @@
 .bar {
   display: flex;
   flex-direction: row;
+  background: red;
+  width: 100%;
 }
 .bar p {
   font-size: 1.4rem;
 }
 .barHolder {
-  width: 50rem;
+  width: 100%;
   background: rgb(212, 212, 212);
-  height: 2rem;
-  margin: 0 1rem;
-  border-radius: 0.5rem;
+  height: 1rem;
+  border-radius: 0rem;
   overflow: hidden;
 }
 .barLen {

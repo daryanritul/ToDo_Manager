@@ -18,6 +18,9 @@
 .title {
   padding: 5px;
 }
+.iconBox {
+  display: flex;
+}
 .icons {
   display: flex;
   justify-content: center;
@@ -32,6 +35,9 @@
 }
 .icons img {
   width: 1.3rem;
+}
+.green:hover {
+  background: rgba(3, 182, 60, 0.146);
 }
 .desc {
   font-size: 1.4rem;

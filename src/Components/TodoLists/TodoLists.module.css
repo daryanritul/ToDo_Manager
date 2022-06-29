@@ -28,3 +28,23 @@
   background: red;
   color: red;
 }
+.colorDot {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  width: 20px;
+  height: 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 100%;
+  margin: 5px;
+}
+.colorDot::-webkit-color-swatch {
+  border-radius: 50%;
+  border: none;
+}
+.colorDot::-moz-color-swatch {
+  border: none;
+  border-radius: 50%;
+}

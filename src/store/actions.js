@@ -2,9 +2,12 @@ import {
   ADD_LIST,
   ADD_TODO,
   ADD_WORKSPACE,
+  CLEAR_COMPLETED,
   DELETE_LIST,
   DELETE_TODO,
   DELETE_WORKSPACE,
+  MARK_AS_DONE,
+  RESET_WORKSPACE,
   SELECT_SPACE,
 } from './actions.types';
 
@@ -51,6 +54,24 @@ export const addTodo = (data, dispatch) => {
 export const deleteTodo = (data, dispatch) => {
   dispatch({
     type: DELETE_TODO,
+    payload: data,
+  });
+};
+export const markAsDone = (data, dispatch) => {
+  dispatch({
+    type: MARK_AS_DONE,
+    payload: data,
+  });
+};
+export const clearCompleted = (data, dispatch) => {
+  dispatch({
+    type: CLEAR_COMPLETED,
+    payload: data,
+  });
+};
+export const resetWorkspace = (data, dispatch) => {
+  dispatch({
+    type: RESET_WORKSPACE,
     payload: data,
   });
 };

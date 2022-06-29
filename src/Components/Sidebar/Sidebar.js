@@ -37,6 +37,9 @@ const Sidebar = () => {
         </div>
       )}
       <div className={sty.sidebar}>
+        <div className={sty.logo}>
+          ToDo<span> Manager</span>
+        </div>
         <p className={sty.title}>My Workspaces</p>
         <div className={sty.worklist}>
           {state.workspace.map((workspace, index) => (
@@ -91,21 +94,15 @@ const Sidebar = () => {
                       {
                         wid: v4(),
                         title: item.value,
+                        totalTodos: 0,
                         todoLists: [
                           {
-                            list: 'Pending',
-                            todo: [],
-                          },
-                          {
-                            list: 'Processing',
-                            todo: [],
-                          },
-                          {
-                            list: 'Overdue',
+                            id: 0,
+                            list: 'My Todos',
                             todo: [],
                           },
                         ],
-                        activity: [],
+                        completed: [],
                       },
                       dispatch
                     );

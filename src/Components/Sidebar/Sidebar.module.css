@@ -3,13 +3,25 @@
   width: 100%;
   height: 100%;
 }
-.title {
+.logo {
   color: #fff;
   text-align: center;
+  font-weight: bold;
+  font-size: 2.5rem;
+  height: 5%;
+}
+.logo span {
+  color: #000;
+}
+.title {
+  color: #fff;
+  text-align: left;
+  padding: 5px 15px;
+  font-size: 1.5rem;
 }
 .worklist {
   background: #157ccb;
-  height: 85%;
+  height: 80%;
   margin: 1rem;
   margin-top: 0rem;
   border-radius: 0.5rem;

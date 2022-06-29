@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { resetWorkspace } from '../../store/actions';
 import { context } from '../../store/store';
 import Activity from '../Activity/Activity';
 import AddTodo from '../AddTodo/AddTodo';
@@ -14,20 +15,39 @@ const Body = () => {
   const setToggle = status => {
     setToogleTodo(status);
   };
-  console.log(state.workspace[state.selectedIndex]);
+  console.log(
+    'This =>',
+    (state.workspace[state.selectedIndex].completed.length /
+      state.workspace[state.selectedIndex].totalTodos) *
+      100
+  );
   return (
     <div className={sty.body}>
       <div className={sty.todos}>
         <div className={sty.todoHead}>
-          <span>
+          <ProgressBar
+            percentage={`${
+              state.workspace[state.selectedIndex].completed.length
+                ? (state.workspace[state.selectedIndex].completed.length /
+                    state.workspace[state.selectedIndex].totalTodos) *
+                  100
+                : 0
+            }%`}
+          />
+          <div className={sty.headDetails}>
             <p className={sty.workTitle}>
               {state.workspace[state.selectedIndex].title}
             </p>
-            <div className={sty.newTodo} onClick={() => setToggle(true)}>
-              add new todo
-            </div>
-          </span>
-          <ProgressBar percentage={'40%'} />
+            <span>
+              <AddTodo type={'List'} />
+              <p
+                className={sty.reset}
+                onClick={() => resetWorkspace('', dispatch)}
+              >
+                Reset Workspace
+              </p>
+            </span>
+          </div>
         </div>
         <div className={sty.todoBody}>
           {state.workspace[state.selectedIndex].todoLists.map((list, index) => (
@@ -39,11 +59,13 @@ const Body = () => {
               listId={list.id}
             />
           ))}
-          <AddTodo type={'List'} />
-          {/* <TodoLists title="Pending" />
-          <TodoLists title="In Progress" />
-          <TodoLists title="Completed" />
-          <TodoLists title="Overdue" /> */}
+          <TodoLists
+            title={'Completed'}
+            data={state.workspace[state.selectedIndex].completed}
+            listId={''}
+            completed
+          />
+          {/* <AddTodo type={'List'} /> */}
         </div>
       </div>
       <div className={sty.activity}>

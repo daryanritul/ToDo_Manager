@@ -7,7 +7,7 @@ import { addLists, addTodo } from '../../store/actions';
 import { context } from '../../store/store';
 import { v4 } from 'uuid';
 
-const AddTodo = ({ type, listId, index }) => {
+const AddTodo = ({ type, listId, index, listName }) => {
   const { state, dispatch } = useContext(context);
 
   const [toggle, setToggle] = useState(false);
@@ -32,7 +32,9 @@ const AddTodo = ({ type, listId, index }) => {
             id: v4(),
             title: todo,
             createdAt: Date.now(),
-            dueDate: '2022-04-06',
+            dueDate: Date.now(),
+            listName,
+            status: false,
           },
         },
         dispatch
@@ -43,11 +45,14 @@ const AddTodo = ({ type, listId, index }) => {
   return (
     <>
       {toggle ? (
-        <div className={`${sty.input} ${sty.btn}`}>
+        <div
+          className={`${sty.input} ${sty.btn} ${type === 'List' && sty.list}`}
+        >
           <input
             type="text"
             placeholder={`Enter ${type} title here`}
             value={todo}
+            onBlur={() => setToggle(false)}
             onChange={event => setTodo(event.target.value)}
             onKeyDown={event => {
               if (event.key === 'Enter') {
@@ -62,7 +67,10 @@ const AddTodo = ({ type, listId, index }) => {
         </div>
       ) : (
         <div>
-          <div className={sty.btn} onClick={() => setToggle(!toggle)}>
+          <div
+            className={`${sty.btn} ${type === 'List' && sty.list}`}
+            onClick={() => setToggle(!toggle)}
+          >
             <img src={add} />
             <p>Add New {type}</p>
           </div>

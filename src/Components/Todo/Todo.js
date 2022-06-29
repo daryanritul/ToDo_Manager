@@ -3,12 +3,12 @@ import React, { useContext, useState } from 'react';
 import sty from './Todo.module.css';
 
 import Delete from '../../Assets/Delete.svg';
+import Checkmark from '../../Assets/Checkmark.svg';
 import TodoModal from '../TodoModal/TodoModal';
 import { context } from '../../store/store';
-import { deleteTodo } from '../../store/actions';
+import { deleteTodo, markAsDone } from '../../store/actions';
 
-const Todo = ({ todo, listId, index }) => {
-  console.log(todo);
+const Todo = ({ todo, listName, listId, index, color, completed }) => {
   const [toogleTodo, setToogleTodo] = useState(false);
   const { dispatch } = useContext(context);
   var date = new Date(todo.dueDate);
@@ -22,7 +22,6 @@ const Todo = ({ todo, listId, index }) => {
       : 'red';
 
   const setToggle = status => {
-    console.log('Dome', status);
     setToogleTodo(status);
   };
 
@@ -36,11 +35,19 @@ const Todo = ({ todo, listId, index }) => {
     );
     console.log('done');
   };
+  const markAsDoneHandler = () => {
+    markAsDone(
+      {
+        index,
+        todoId: todo.id,
+        todo,
+      },
+      dispatch
+    );
+  };
 
   return (
     <>
-      {/* {toogleTodo && <TodoModal todo={todo} setToggle={setToggle} />} */}
-
       <div
         className={sty.todo}
         onClick={() => {
@@ -49,19 +56,32 @@ const Todo = ({ todo, listId, index }) => {
       >
         <div className={sty.todoHead}>
           <p className={sty.title}>{todo.title}</p>
-          <div className={sty.icons} onClick={event => deleteTodoHander(event)}>
-            <img src={Delete} />
-          </div>
+          {!completed && (
+            <div className={sty.iconBox}>
+              <div
+                className={`${sty.icons} ${sty.green}`}
+                onClick={event => markAsDoneHandler(event)}
+              >
+                <img src={Checkmark} />
+              </div>
+              <div
+                className={sty.icons}
+                onClick={event => deleteTodoHander(event)}
+              >
+                <img src={Delete} />
+              </div>
+            </div>
+          )}
         </div>
         <div className={sty.todoFoot}>
           <div className={sty.status}>
             <div
               className={sty.statusDot}
               style={{
-                backgroundColor: dotColor,
+                backgroundColor: color,
               }}
             ></div>
-            <p className={sty.text}>{todo.status}</p>
+            <p className={sty.text}>{todo.listName}</p>
           </div>
           <div className={sty.date}>
             Due{' '}

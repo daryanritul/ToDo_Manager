@@ -2,11 +2,33 @@ import {
   ADD_LIST,
   ADD_TODO,
   ADD_WORKSPACE,
+  CLEAR_COMPLETED,
   DELETE_LIST,
   DELETE_TODO,
   DELETE_WORKSPACE,
+  MARK_AS_DONE,
+  RESET_WORKSPACE,
   SELECT_SPACE,
 } from './actions.types';
+
+const intialState = {
+  workspace: [
+    {
+      wid: 'sd2as2d2a2333sda',
+      title: 'My Workspace',
+      totalTodos: 0,
+      todoLists: [
+        {
+          id: 0,
+          list: 'My Todos',
+          todo: [],
+        },
+      ],
+      completed: [],
+    },
+  ],
+  selectedIndex: 0,
+};
 
 export default (state, action) => {
   switch (action.type) {
@@ -20,6 +42,7 @@ export default (state, action) => {
       var newState = state.workspace.filter(
         item => item.wid !== action.payload
       );
+
       return {
         ...state,
         workspace: newState,
@@ -49,6 +72,12 @@ export default (state, action) => {
       var newList = state.workspace[state.selectedIndex].todoLists.filter(
         list => list.id !== action.payload
       );
+      var len = 0;
+      state.workspace[state.selectedIndex].todoLists.map(list => {
+        if (list.id === action.payload) {
+          len = list.todo.length;
+        }
+      });
       return {
         ...state,
         workspace: [
@@ -56,6 +85,7 @@ export default (state, action) => {
           {
             ...state.workspace[state.selectedIndex],
             todoLists: newList,
+            totalTodos: state.workspace[state.selectedIndex].totalTodos - len,
           },
           ...state.workspace.slice(state.selectedIndex + 1),
         ],
@@ -87,6 +117,7 @@ export default (state, action) => {
                 action.payload.index + 1
               ),
             ],
+            totalTodos: state.workspace[state.selectedIndex].totalTodos + 1,
           },
           ...state.workspace.slice(state.selectedIndex + 1),
         ],
@@ -117,6 +148,69 @@ export default (state, action) => {
                 action.payload.index + 1
               ),
             ],
+            totalTodos: state.workspace[state.selectedIndex].totalTodos - 1,
+          },
+          ...state.workspace.slice(state.selectedIndex + 1),
+        ],
+      };
+
+    case MARK_AS_DONE:
+      var todos = state.workspace[state.selectedIndex].todoLists[
+        action.payload.index
+      ].todo.filter(todo => todo.id != action.payload.todoId);
+      return {
+        ...state,
+        workspace: [
+          ...state.workspace.slice(0, state.selectedIndex),
+          {
+            ...state.workspace[state.selectedIndex],
+            todoLists: [
+              ...state.workspace[state.selectedIndex].todoLists.slice(
+                0,
+                action.payload.index
+              ),
+              {
+                ...state.workspace[state.selectedIndex].todoLists[
+                  action.payload.index
+                ],
+                todo: todos,
+              },
+              ...state.workspace[state.selectedIndex].todoLists.slice(
+                action.payload.index + 1
+              ),
+            ],
+            completed: [
+              ...state.workspace[state.selectedIndex].completed,
+              action.payload.todo,
+            ],
+          },
+          ...state.workspace.slice(state.selectedIndex + 1),
+        ],
+      };
+    case CLEAR_COMPLETED:
+      var len = state.workspace[state.selectedIndex].completed.length;
+      return {
+        ...state,
+        workspace: [
+          ...state.workspace.slice(0, state.selectedIndex),
+          {
+            ...state.workspace[state.selectedIndex],
+            completed: [],
+            totalTodos: state.workspace[state.selectedIndex].totalTodos - len,
+          },
+          ...state.workspace.slice(state.selectedIndex + 1),
+        ],
+      };
+    case RESET_WORKSPACE:
+      var newList = state.workspace[state.selectedIndex].todoLists.filter(
+        list => list.id !== action.payload
+      );
+      return {
+        ...state,
+        workspace: [
+          ...state.workspace.slice(0, state.selectedIndex),
+          {
+            ...intialState.workspace[0],
           },
           ...state.workspace.slice(state.selectedIndex + 1),
         ],
