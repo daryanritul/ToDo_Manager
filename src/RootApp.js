@@ -4,24 +4,26 @@ import { context } from './store/store';
 
 import reducer from './store/reducer';
 
-const intialState = {
-  workspace: [
-    {
-      wid: 'sd2as2d2a2333sda',
-      title: 'My Workspace',
-      totalTodos: 0,
-      todoLists: [
+const intialState = localStorage.getItem('user')
+  ? JSON.parse(localStorage.getItem('user'))
+  : {
+      workspace: [
         {
-          id: 0,
-          list: 'My Todos',
-          todo: [],
+          wid: 'sd2as2d2a2333sda',
+          title: 'My Workspace',
+          totalTodos: 0,
+          todoLists: [
+            {
+              id: 0,
+              list: 'My Todos',
+              todo: [],
+            },
+          ],
+          completed: [],
         },
       ],
-      completed: [],
-    },
-  ],
-  selectedIndex: 0,
-};
+      selectedIndex: 0,
+    };
 
 const RootApp = () => {
   const [state, dispatch] = useReducer(reducer, intialState);
