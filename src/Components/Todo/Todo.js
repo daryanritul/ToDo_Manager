@@ -1,30 +1,19 @@
-import React, { useContext, useState } from 'react';
-
+import React, { useContext } from 'react';
 import sty from './Todo.module.css';
 
 import Delete from '../../Assets/Delete.svg';
 import Checkmark from '../../Assets/Checkmark.svg';
+
 import { context } from '../../store/store';
 import { deleteTodo, markAsDone } from '../../store/actions';
 
+import { useDrag } from 'react-dnd';
+
 const Todo = ({ todo, listName, listId, index, color, completed }) => {
-  const [toogleTodo, setToogleTodo] = useState(false);
   const { dispatch } = useContext(context);
   var date = new Date(todo.dueDate);
-  const dotColor =
-    todo.status === 'pending'
-      ? 'tomato'
-      : todo.status === 'inprogress'
-      ? 'yellow'
-      : todo.status === 'completed'
-      ? 'green'
-      : 'red';
 
-  const setToggle = status => {
-    setToogleTodo(status);
-  };
-
-  const deleteTodoHander = event => {
+  const deleteTodoHander = () => {
     deleteTodo(
       {
         index,
@@ -32,7 +21,6 @@ const Todo = ({ todo, listName, listId, index, color, completed }) => {
       },
       dispatch
     );
-    console.log('done');
   };
   const markAsDoneHandler = () => {
     markAsDone(
@@ -44,14 +32,25 @@ const Todo = ({ todo, listName, listId, index, color, completed }) => {
       dispatch
     );
   };
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: 'todos',
+    item: {
+      listName: todo.listName,
+      index,
+      todoId: todo.id,
+      todo,
+      listId,
+    },
+    collect: monitor => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
 
   return (
     <>
       <div
-        className={sty.todo}
-        onClick={() => {
-          setToggle(true);
-        }}
+        className={`${sty.todo} ${isDragging && sty.raise}`}
+        ref={!completed ? drag : null}
       >
         <div className={sty.todoHead}>
           <p className={sty.title}>{todo.title}</p>

@@ -8,20 +8,36 @@
   text-align: center;
   font-weight: bold;
   font-size: 2.5rem;
-  height: 5%;
+  height: 8%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 .logo span {
   color: #000;
 }
+.logoIcons {
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  padding: 3px;
+}
 .title {
   color: #fff;
   text-align: left;
-  padding: 5px 15px;
   font-size: 1.5rem;
+  padding: 0px 10px;
+  height: 4%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
 }
 .worklist {
   background: #157ccb;
-  height: 80%;
+  height: 78%;
   margin: 1rem;
   margin-top: 0rem;
   border-radius: 0.5rem;

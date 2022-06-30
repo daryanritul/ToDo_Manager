@@ -8,11 +8,7 @@ const App = () => {
     localStorage.setItem('user', JSON.stringify(state));
   }, [state]);
 
-  return (
-    <>
-      <Home />
-    </>
-  );
+  return <Home />;
 };
 
 export default App;

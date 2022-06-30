@@ -6,9 +6,18 @@ import sty from './TodoLists.module.css';
 
 import Delete from '../../Assets/Delete.svg';
 
-import { clearCompleted, deleteList } from '../../store/actions';
+import {
+  addTodo,
+  clearCompleted,
+  deleteList,
+  deleteTodo,
+  markAsDone,
+} from '../../store/actions';
 import { context } from '../../store/store';
 
+import { v4 } from 'uuid';
+
+import { useDrop } from 'react-dnd';
 const TodoLists = ({ title, data, listId, index, completed }) => {
   const { dispatch } = useContext(context);
   const [color, setColor] = useState('#000');
@@ -20,6 +29,50 @@ const TodoLists = ({ title, data, listId, index, completed }) => {
   const handleClearList = () => {
     clearCompleted(listId, dispatch);
   };
+  console.log(data, listId, title);
+  const [{ isOver }, drop] = useDrop(() => ({
+    accept: 'todos',
+    drop: item => dropHandler(item),
+    collect: monitor => ({
+      isOver: monitor.isOver(),
+    }),
+  }));
+
+  const dropHandler = ({ listName, index: idx, todo, todoId }) => {
+    if (title !== listName && title === 'Completed') {
+      markAsDone(
+        {
+          index: idx,
+          todo,
+          todoId,
+        },
+        dispatch
+      );
+    } else if (title !== listName) {
+      console.log(listName, 'Moved to ', title);
+      console.log(index, idx);
+      addTodo(
+        {
+          id: listId,
+          index,
+          todo: {
+            ...todo,
+            id: v4(),
+            listName: title,
+          },
+        },
+        dispatch
+      );
+      deleteTodo(
+        {
+          index: idx,
+          todoId,
+        },
+        dispatch
+      );
+    }
+  };
+
   console.log(data);
 
   return (
@@ -40,7 +93,7 @@ const TodoLists = ({ title, data, listId, index, completed }) => {
         {!completed && <img src={Delete} onClick={handleDelete} />}
         {completed && <img src={Delete} onClick={handleClearList} />}
       </div>
-      <div className={sty.listBody}>
+      <div className={sty.listBody} ref={drop}>
         {data.map(todo => (
           <Todo
             key={todo.id}
@@ -51,6 +104,7 @@ const TodoLists = ({ title, data, listId, index, completed }) => {
             completed={completed}
           />
         ))}
+        {isOver && <div className={sty.todoSkleton}></div>}
         {!completed && (
           <AddTodo
             type={'Todo'}

@@ -15,7 +15,7 @@ const intialState = localStorage.getItem('user')
           todoLists: [
             {
               id: 0,
-              list: 'My Todos',
+              list: 'Tasks',
               todo: [],
             },
           ],

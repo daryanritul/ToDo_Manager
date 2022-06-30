@@ -213,7 +213,7 @@ export default (state, action) => {
             todoLists: [
               {
                 id: 0,
-                list: 'My Todos',
+                list: 'Tasks',
                 todo: [],
               },
             ],

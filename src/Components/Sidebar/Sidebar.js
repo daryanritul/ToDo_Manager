@@ -1,4 +1,6 @@
 import React, { useContext, useState } from 'react';
+import sty from './Sidebar.module.css';
+
 import {
   addWorkspace,
   deleteWorkspace,
@@ -6,10 +8,11 @@ import {
 } from '../../store/actions';
 import { context } from '../../store/store';
 
-import sty from './Sidebar.module.css';
-
 import Delete from '../../Assets/Delete.svg';
+
 import { v4 } from 'uuid';
+
+import { NextPlan } from '@styled-icons/material';
 
 const Sidebar = () => {
   const { state, dispatch } = useContext(context);
@@ -38,7 +41,8 @@ const Sidebar = () => {
       )}
       <div className={sty.sidebar}>
         <div className={sty.logo}>
-          ToDo<span> Manager</span>
+          <NextPlan className={sty.logoIcons} />
+          What's <span> Next</span>
         </div>
         <p className={sty.title}>My Workspaces</p>
         <div className={sty.worklist}>
@@ -86,6 +90,7 @@ const Sidebar = () => {
                 })
               }
               value={item.value}
+              autoFocus={item.status}
               placeholder={'Enter Workspace Name'}
               onKeyDown={event => {
                 if (event.key === 'Enter') {
@@ -113,6 +118,12 @@ const Sidebar = () => {
                   });
                 }
               }}
+              onBlur={() =>
+                setItem({
+                  value: '',
+                  status: false,
+                })
+              }
             />
           )}
         </div>
