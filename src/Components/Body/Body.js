@@ -1,11 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { resetWorkspace } from '../../store/actions';
 import { context } from '../../store/store';
-import Activity from '../Activity/Activity';
 import AddTodo from '../AddTodo/AddTodo';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import TodoLists from '../TodoLists/TodoLists';
-import TodoModal from '../TodoModal/TodoModal';
 
 import sty from './Body.module.css';
 
@@ -65,13 +63,8 @@ const Body = () => {
             listId={''}
             completed
           />
-          {/* <AddTodo type={'List'} /> */}
         </div>
       </div>
-      <div className={sty.activity}>
-        <Activity />
-      </div>
-      {toogleTodo && <TodoModal todo={false} setToggle={setToggle} />}
     </div>
   );
 };

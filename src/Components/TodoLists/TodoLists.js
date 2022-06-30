@@ -20,6 +20,7 @@ const TodoLists = ({ title, data, listId, index, completed }) => {
   const handleClearList = () => {
     clearCompleted(listId, dispatch);
   };
+  console.log(data);
 
   return (
     <div className={sty.todoList}>
@@ -34,7 +35,7 @@ const TodoLists = ({ title, data, listId, index, completed }) => {
             }}
             disabled={completed}
           />
-          {title} (10)
+          {title} ({data.length})
         </div>
         {!completed && <img src={Delete} onClick={handleDelete} />}
         {completed && <img src={Delete} onClick={handleClearList} />}

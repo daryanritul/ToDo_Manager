@@ -203,15 +203,21 @@ export default (state, action) => {
         ],
       };
     case RESET_WORKSPACE:
-      var newList = state.workspace[state.selectedIndex].todoLists.filter(
-        list => list.id !== action.payload
-      );
       return {
         ...state,
         workspace: [
           ...state.workspace.slice(0, state.selectedIndex),
           {
-            ...intialState.workspace[0],
+            ...state.workspace[state.selectedIndex],
+            totalTodos: 0,
+            todoLists: [
+              {
+                id: 0,
+                list: 'My Todos',
+                todo: [],
+              },
+            ],
+            completed: [],
           },
           ...state.workspace.slice(state.selectedIndex + 1),
         ],

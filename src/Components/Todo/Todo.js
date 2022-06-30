@@ -4,7 +4,6 @@ import sty from './Todo.module.css';
 
 import Delete from '../../Assets/Delete.svg';
 import Checkmark from '../../Assets/Checkmark.svg';
-import TodoModal from '../TodoModal/TodoModal';
 import { context } from '../../store/store';
 import { deleteTodo, markAsDone } from '../../store/actions';
 
