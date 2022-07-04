@@ -124,3 +124,43 @@
 .confirm button:hover {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
+@media only screen and (max-width: 600px) {
+  .sidebar {
+    position: absolute;
+    display: flex;
+    z-index: 9;
+    height: 50px;
+    bottom: 0px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .logo {
+    display: none;
+  }
+  .title {
+    display: flex;
+    height: 90%;
+    width: 30%;
+  }
+  .worklist {
+    display: none;
+  }
+  .activeModal {
+    /* display: none; */
+    display: block;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 9;
+    height: calc(100% - 50px);
+    border-radius: 0px;
+  }
+  .buttonBox {
+    display: flex;
+    height: 90%;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+  }
+}

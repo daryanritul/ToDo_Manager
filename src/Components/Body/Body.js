@@ -39,7 +39,7 @@ const Body = () => {
                 className={sty.reset}
                 onClick={() => resetWorkspace('', dispatch)}
               >
-                Reset Workspace
+                Reset
               </p>
             </span>
           </div>

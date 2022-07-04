@@ -76,3 +76,8 @@
 .newTodo:hover {
   background: #fff;
 }
+@media only screen and (min-width: 600px) {
+  .reset::after {
+    content: ' Workspace';
+  }
+}

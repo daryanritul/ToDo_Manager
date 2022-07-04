@@ -17,6 +17,7 @@ import { NextPlan } from '@styled-icons/material';
 const Sidebar = () => {
   const { state, dispatch } = useContext(context);
   const [cnfDelete, setCnfDelete] = useState(false);
+  const [workspaceModal, setWorkspaceModal] = useState(false);
   const [item, setItem] = useState({
     value: '',
     status: false,
@@ -44,8 +45,13 @@ const Sidebar = () => {
           <NextPlan className={sty.logoIcons} />
           What's <span> Next</span>
         </div>
-        <p className={sty.title}>My Workspaces</p>
-        <div className={sty.worklist}>
+        <p
+          className={sty.title}
+          onClick={() => setWorkspaceModal(!workspaceModal)}
+        >
+          {workspaceModal ? 'Close' : 'Workspaces'}
+        </p>
+        <div className={`${sty.worklist} ${workspaceModal && sty.activeModal}`}>
           {state.workspace.map((workspace, index) => (
             <div
               key={index}
