@@ -2,4 +2,4 @@
 
 ## Task Managing and Organizing site build in React Js
 
-### Site Link : https://what-snext.web.app/
+### LIVE PROJECT LINK : https://whatsnext.daryanritul.in/
