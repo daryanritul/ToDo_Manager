@@ -2,8 +2,9 @@
 
 ## About The Project
 
-[![Screen Shots]]('.\src\Assets\SS-01.jpg')
-[![Screen Shots]]('.\src\Assets\SS-02.jpg')
+[![Screen Shots]](![SS-01](https://user-images.githubusercontent.com/67550989/178369641-e7ad9054-553b-44ab-9e5c-1263648e7fb8.jpg))
+[![Screen Shots]](![SS-02](https://user-images.githubusercontent.com/67550989/178369695-e2cc1012-292c-4d65-8f93-6f151b63d8f1.jpg)
+)
 
 What's Next is a Task Organising Web Application. User can create n number of workspaces, Lists and Tasks. User can drag and drops feature to move tasks to complete or to the another list. Project works on local storage, so no internet is required after visiting the url. Easy access and simplistic UI.
 
