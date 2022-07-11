@@ -29,7 +29,6 @@ const TodoLists = ({ title, data, listId, index, completed }) => {
   const handleClearList = () => {
     clearCompleted(listId, dispatch);
   };
-  console.log(data, listId, title);
   const [{ isOver }, drop] = useDrop(() => ({
     accept: 'todos',
     drop: item => dropHandler(item),
@@ -49,8 +48,6 @@ const TodoLists = ({ title, data, listId, index, completed }) => {
         dispatch
       );
     } else if (title !== listName) {
-      console.log(listName, 'Moved to ', title);
-      console.log(index, idx);
       addTodo(
         {
           id: listId,
@@ -72,8 +69,6 @@ const TodoLists = ({ title, data, listId, index, completed }) => {
       );
     }
   };
-
-  console.log(data);
 
   return (
     <div className={sty.todoList}>

@@ -41,7 +41,6 @@ const AddTodo = ({ type, listId, index, listName }) => {
         },
         dispatch
       );
-      console.log('Done');
     }
   };
   return (

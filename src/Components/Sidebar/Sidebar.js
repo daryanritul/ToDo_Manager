@@ -109,7 +109,7 @@ const Sidebar = () => {
                         todoLists: [
                           {
                             id: 0,
-                            list: 'My Todos',
+                            list: 'Tasks',
                             todo: [],
                           },
                         ],
